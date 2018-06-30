@@ -22,15 +22,10 @@ class Layer {
     this.type = type
     this.autoClear = autoClear
     style && (this.olStyle = Layer.createStyle(style))
-    this._source = new ol.source.Vector({
-      features: []
-    })
-    this._layer = new ol.layer.Vector({
-      source: this._source,
-      style: this.olStyle,
-      zIndex,
-      visible
-    })
+
+    this._source = this._createSource()
+
+    this._layer = this._createLayer(zIndex, visible)
   }
 
   draw(data) {
@@ -55,6 +50,21 @@ class Layer {
 
   setVisible(visible) {
     this._layer.setVisible(visible)
+  }
+
+  _createLayer(zIndex, visible) {
+    return new ol.layer.Vector({
+      source: this._source,
+      style: this.olStyle,
+      zIndex,
+      visible
+    })
+  }
+
+  _createSource() {
+    return new ol.source.Vector({
+      features: []
+    })
   }
 
   _getFeature(id) {
