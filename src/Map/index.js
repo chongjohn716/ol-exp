@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import olMap from './olMap'
-import polygons from '../data/polygons';
 
 class Map extends Component {
 
@@ -13,11 +12,8 @@ class Map extends Component {
   componentDidMount() {
     olMap.render(this.$el)
     let map = window.giscomp = this.map = olMap
-    this.polygon = map.createLayer({
-      type: 'polygon',
-      id: 'ploygon'
-    })
-    this.polygon.draw(polygons)
+    map.draw()
+
     // this.map = new ol.Map({
     //   layers: [
     //     new ol.layer.Tile({

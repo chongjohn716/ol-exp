@@ -1,4 +1,5 @@
 import consts from './consts'
+import createStyle from './style'
 
 const ol = window.ol
 
@@ -13,6 +14,10 @@ const ol = window.ol
  */
 class Layer {
   constructor(options) {
+    if (new.target === Layer) {
+      throw new Error('本类不能实例化');
+    }
+    this.options = options
     this.init(options)
   }
 
@@ -53,6 +58,7 @@ class Layer {
   }
 
   _createLayer(zIndex, visible) {
+    debugger
     return new ol.layer.Vector({
       source: this._source,
       style: this.olStyle,
@@ -79,12 +85,11 @@ class Layer {
     let feature = new ol.Feature({
       geometry: this._createGeometry(data),
       data: data,
-      name: data.name,
       id: index
     })
 
     feature.data = data
-    data.style && feature.setStyle(createStyle(data.style))
+    data.style && feature.setStyle(createStyle(/*data.style*/))
     return feature
   }
 
@@ -96,31 +101,31 @@ class Layer {
 Layer.consts = consts
 
 // const defaultLabelStyle = ''
-function createStyle({
-  fill = 'rgba(0, 0, 255, 0.1)',
-  strokeColor = 'blue',
-  strokeWidth = 2,
-  text = '1'
-}) {
-  return new ol.style.Style({
-    stroke: new ol.style.Stroke({
-      color: strokeColor,
-      width: strokeWidth,
-    }),
-    fill: new ol.style.Fill({
-      color: fill
-    }),
-    text: text && new ol.style.Text({
-      text: text,
-      overflow: true,
-      placement: 'point',
-      textAlign: 'center',
-      fill: new ol.style.Fill({
-        color: '#fff'
-      })
-    })
-  })
-}
+// function createStyle({
+//   fill = 'rgba(0, 0, 255, 0.1)',
+//   strokeColor = 'blue',
+//   strokeWidth = 2,
+//   text = '1'
+// }) {
+//   return new ol.style.Style({
+//     stroke: new ol.style.Stroke({
+//       color: strokeColor,
+//       width: strokeWidth,
+//     }),
+//     fill: new ol.style.Fill({
+//       color: fill
+//     }),
+//     text: text && new ol.style.Text({
+//       text: text,
+//       overflow: true,
+//       placement: 'point',
+//       textAlign: 'center',
+//       fill: new ol.style.Fill({
+//         color: '#fff'
+//       })
+//     })
+//   })
+// }
 
 // dash stroke style 
 // lineCap: 'butt',
