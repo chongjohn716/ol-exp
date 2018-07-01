@@ -1,6 +1,5 @@
 import { createLayer as LayerCreateLayer } from './layer'
 
-
 /**
 * 创建图层
 * @param {String|Number} id 

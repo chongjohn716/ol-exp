@@ -14,9 +14,9 @@ const ol = window.ol
  */
 class Layer {
   constructor(options) {
-    if (new.target === Layer) {
-      throw new Error('本类不能实例化');
-    }
+    // if (new.target === Layer) {
+    //   throw new Error('本类不能实例化');
+    // }
     this.options = options
     this.init(options)
   }
@@ -58,7 +58,6 @@ class Layer {
   }
 
   _createLayer(zIndex, visible) {
-    debugger
     return new ol.layer.Vector({
       source: this._source,
       style: this.olStyle,
