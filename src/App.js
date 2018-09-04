@@ -16,7 +16,7 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <div className="left wraper">left</div>
+        {/* <div className="left wraper">left</div> */}
         <div className="right wraper">
           <Map />
         </div>

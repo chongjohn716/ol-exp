@@ -1,4 +1,5 @@
 import Layer from './layer'
+// import { debug } from 'util';
 
 let ol = window.ol
 

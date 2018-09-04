@@ -551,11 +551,12 @@ export default [
           22.6648
         ]
       ]
-    ],
-    style: {
-      fill: 'rgba(255, 0, 0, 0.3)',
-      strokeColor: 'blue'
-    }
+    ]
+    // ,
+    // style: {
+    //   fill: 'rgba(255, 0, 0, 0.3)',
+    //   strokeColor: 'blue'
+    // }
   },
   {
     "id": "4403",
@@ -787,11 +788,12 @@ export default [
           22.7197
         ]
       ]
-    ],
-    style: {
-      fill: 'rgba(255, 0, 0, 0.3)',
-      strokeColor: 'red'
-    }
+    ]
+    // ,
+    // style: {
+    //   fill: 'rgba(255, 0, 0, 0.3)',
+    //   strokeColor: 'red'
+    // }
   },
   {
     "id": "4419",
@@ -963,10 +965,11 @@ export default [
           23.1152
         ]
       ]
-    ],
-    style: {
-      fill: 'rgba(255, 0, 0, 0.3)',
-      strokeColor: 'green'
-    }
+    ]
+    // ,
+    // style: {
+    //   fill: 'rgba(255, 0, 0, 0.3)',
+    //   strokeColor: 'green'
+    // }
   }
 ]

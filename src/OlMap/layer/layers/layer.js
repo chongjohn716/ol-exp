@@ -1,5 +1,5 @@
-import consts from './consts'
-import createStyle from './style'
+import createStyle from '../style'
+import { layerTypes } from '../consts'
 
 const ol = window.ol
 
@@ -22,11 +22,15 @@ class Layer {
   }
 
   init({ id, type, style, visible, zIndex, autoClear = true }) {
+    if (layerTypes.indexOf(type) === -1) {
+      throw new Error('layer type nonsupport: ' + type)
+    }
+
     this.id = id
     this.style = style
     this.type = type
     this.autoClear = autoClear
-    style && (this.olStyle = Layer.createStyle(style))
+    style && (this.olStyle = createStyle(style, type))
 
     this._source = this._createSource()
 
@@ -77,18 +81,15 @@ class Layer {
   }
 
   _createFeatures(data) {
-    return data.map((item, index) => this._createFeature(item, index))
+    let type = this.type
+    return data.map((item, index) => this._createFeature(item, type))
   }
 
-  _createFeature(data, index) {
-    let feature = new ol.Feature({
-      geometry: this._createGeometry(data),
-      data: data,
-      id: index
-    })
-
-    feature.data = data
-    data.style && feature.setStyle(createStyle(/*data.style*/))
+  _createFeature(data, type) {
+    let feature = new ol.Feature(this._createGeometry(data))
+    feature.set('id', data.id)
+    feature.set('data', data)
+    data.style && feature.setStyle(createStyle(data.style, type))
     return feature
   }
 
@@ -96,35 +97,6 @@ class Layer {
     return null
   }
 }
-
-Layer.consts = consts
-
-// const defaultLabelStyle = ''
-// function createStyle({
-//   fill = 'rgba(0, 0, 255, 0.1)',
-//   strokeColor = 'blue',
-//   strokeWidth = 2,
-//   text = '1'
-// }) {
-//   return new ol.style.Style({
-//     stroke: new ol.style.Stroke({
-//       color: strokeColor,
-//       width: strokeWidth,
-//     }),
-//     fill: new ol.style.Fill({
-//       color: fill
-//     }),
-//     text: text && new ol.style.Text({
-//       text: text,
-//       overflow: true,
-//       placement: 'point',
-//       textAlign: 'center',
-//       fill: new ol.style.Fill({
-//         color: '#fff'
-//       })
-//     })
-//   })
-// }
 
 // dash stroke style 
 // lineCap: 'butt',

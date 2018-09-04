@@ -1,6 +1,7 @@
-import PolygonLayer from './polygon-layer'
-import PointLayer from './point-layer'
-import LineLayer from './line-layer'
+import PolygonLayer from './layers/polygon-layer'
+import PointLayer from './layers/point-layer'
+import LineLayer from './layers/line-layer'
+import GeoJsonLayer from './layers/geojson-layer'
 
 /**
  * 创建图层工厂函数
@@ -17,8 +18,9 @@ function createLayer(options) {
     case 'line':
       layer = new LineLayer(options)
       break
-    // case 'point':
-    // layer = new PointLayer(options)
+    case 'geojson':
+      layer = new GeoJsonLayer(options)
+      break
     default:
       layer = new PointLayer(options)
       break;
